@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClassLink - Real-time Collaboration</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <div class="logo">
+          <h2>ClassLink</h2>
+        </div>
+        <ul class="nav-menu">
+          <li>
+            <span
+              class="contact-btn"
+              onclick="window.location.href='{{ url_for('static', filename='downloads/ClassLink-ChatApp.zip') }}'"
+            >
+              Download App
+            </span>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>
+          <strong>Innovative</strong>, <strong>Seamless</strong>, and
+          <strong>Real-time</strong> interaction with an eye for educating
+          learners through digital collaboration.
+        </h1>
+        <p>Learn. Share. Grow. Together in real-time.</p>
+        <a href="{{ url_for('login') }}" class="cta-button">Begin Learning!</a>
+      </div>
+    </section>
+  </body>
+</html>

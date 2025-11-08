@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plans - ClassLink</title>
+    <style>
+    /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f3f0;
+}
+
+/* Header Styles */
+.header {
+    background-color: #4a2c20;
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo h2 {
+    color: #f5f3f0;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.logo a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #f5f3f0;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #d4a574;
+}
+
+.contact-btn {
+    background-color: #d4a574;
+    color: #4a2c20;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.contact-btn:hover {
+    background-color: #c29660;
+}
+
+/* Main Content */
+.main-content {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Hero Section */
+.plans-hero {
+    margin-bottom: 3rem;
+}
+
+.plans-hero h1 {
+    font-size: 3rem;
+    color: #4a2c20;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.plans-hero .brand {
+    font-size: 3rem;
+    color: #4a2c20;
+    font-weight: normal;
+}
+
+.plans-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Plans Grid */
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.plan-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 2rem;
+    height: 300px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 2px solid #e0e0e0;
+}
+
+.plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.plan-card h3 {
+    font-size: 1.3rem;
+    color: #4a2c20;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+/* Bottom Section */
+.bottom-section {
+    background-color: #b8a082;
+    border-radius: 25px;
+    height: 200px;
+    margin-bottom: 2rem;
+}
+
+/* Footer */
+.footer {
+    background-color: #4a2c20;
+    color: #f5f3f0;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 15px 15px 0 0;
+}
+
+.footer p {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .main-content {
+        padding: 2rem 1rem;
+    }
+
+    .plans-hero h1,
+    .plans-hero .brand {
+        font-size: 2rem;
+    }
+
+    .plans-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .plans-hero h1,
+    .plans-hero .brand {
+        font-size: 1.5rem;
+    }
+
+    .plans-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .plan-card {
+        height: 250px;
+        padding: 1.5rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <h2>ClassLink</h2>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="download.html" class="nav-link">Download</a></li>
+                <li><a href="Aboutus.html" class="nav-link">About Us</a></li>
+                <li><a href="plans.html" class="nav-link">Plans</a></li>
+                <li><a href="privacy.html" class="nav-link">Privacy</a></li>
+            </ul>
+            <a href="contactus.html" class="contact-btn">Contact Us</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Plans Hero Section -->
+        <section class="plans-hero">
+            <h1>Synced <span class="brand">by ClassLink</span></h1>
+            <p class="plans-subtitle">See our plans tailored plans hat best suite your daily collaborative needs.</p>
+        </section>
+        
+        <!-- Plans Grid -->
+        <section class="plans-grid">
+            <div class="plan-card">
+                <h3>Free Plan</h3>
+            </div>
+            
+            <div class="plan-card">
+                <h3>Standard Plan</h3>
+            </div>
+            
+            <div class="plan-card">
+                <h3>Professional Plan</h3>
+            </div>
+            
+            <div class="plan-card">
+                <h3>Enterprise Plan</h3>
+            </div>
+        </section>
+
+        <!-- Bottom Section -->
+        <div class="bottom-section"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Footer</p>
+    </footer>
+</body>
+</html>

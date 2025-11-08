@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat Room</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  </head>
+  <body>
+    <h2>Chat Room</h2>
+    <ul id="messages">
+      {% for msg in messages %}
+      <li>{{ msg.sender }}: {{ msg.msg }}</li>
+      {% endfor %}
+    </ul>
+
+    <input id="msg" autocomplete="off" placeholder="Type a message..." />
+    <button onclick="sendMsg()">Send</button>
+
+    <br /><br />
+    <a href="/dashboard"><button>Back to Dashboard</button></a>
+
+    <script>
+      const socket = io({ transports: ["websocket"] });
+
+      // Receive messages in real time
+      socket.on("message", function (msg) {
+        let li = document.createElement("li");
+        li.textContent = msg;
+        document.getElementById("messages").appendChild(li);
+      });
+
+      const input = document.getElementById("msg");
+
+      function sendMsg() {
+        if (input.value.trim() !== "") {
+          socket.send(input.value);
+          input.value = "";
+        }
+      }
+
+      input.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+          sendMsg();
+        }
+      });
+    </script>
+  </body>
+</html>

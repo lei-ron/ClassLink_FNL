@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting - ClassLink</title>
+    <style>
+    /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f3f0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Meeting Container */
+.meeting-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 60px;
+    background-color: #4a2c20;
+    color: #f5f3f0;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0.5rem;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+/* Navigation Icons */
+.nav-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #b8a082;
+    border: none;
+    border-radius: 8px;
+    color: #4a2c20;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-icon:hover {
+    background-color: #d4a574;
+    transform: scale(1.1);
+}
+
+.nav-icon.active {
+    background-color: #d4a574;
+}
+
+/* User Profiles */
+.user-profiles {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.user-profile {
+    width: 35px;
+    height: 35px;
+    background-color: #b8a082;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4a2c20;
+    font-size: 1rem;
+}
+
+.user-profile:hover {
+    background-color: #d4a574;
+    transform: scale(1.1);
+}
+
+/* Main Video Area */
+.main-video-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+/* Main Video */
+.main-video {
+    flex: 1;
+    background-color: #b8a082;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4a2c20;
+    font-size: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-video::before {
+    content: "Main Video Stream";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(74, 44, 32, 0.8);
+    color: #f5f3f0;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+}
+
+/* Participants Grid */
+.participants-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    height: 200px;
+}
+
+.participant-video {
+    background-color: #4a2c20;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f5f3f0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.participant-video:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(74, 44, 32, 0.3);
+}
+
+.participant-video.host {
+    background-color: #5a3a2a;
+    border: 2px solid #d4a574;
+}
+
+/* Chat Sidebar */
+.chat-sidebar {
+    width: 280px;
+    background-color: #f5f3f0;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    border-left: 1px solid #d4a574;
+}
+
+/* Time Display */
+.time-display {
+    background-color: #d4a574;
+    color: #4a2c20;
+    padding: 1rem;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.time-display .time {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.time-display .date {
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+}
+
+/* Participants List */
+.participants-list {
+    background-color: #f5f3f0;
+    padding: 1rem;
+    border-radius: 15px;
+    border: 1px solid #d4a574;
+}
+
+.participants-header {
+    color: #4a2c20;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.participant-icons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.participant-icon {
+    width: 30px;
+    height: 30px;
+    background-color: #b8a082;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4a2c20;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.participant-icon:hover {
+    background-color: #d4a574;
+    transform: scale(1.1);
+}
+
+/* Chat Area */
+.chat-area {
+    flex: 1;
+    background-color: #f5f3f0;
+    border: 1px solid #d4a574;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-style: italic;
+}
+
+.chat-input-area {
+    padding: 1rem;
+    border-top: 1px solid #d4a574;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.chat-input {
+    flex: 1;
+    background-color: #d4a574;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 25px;
+    color: #4a2c20;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.chat-input::placeholder {
+    color: #6b4a32;
+    opacity: 0.7;
+}
+
+.send-btn {
+    background-color: #d4a574;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    color: #4a2c20;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.send-btn:hover {
+    background-color: #c29660;
+    transform: scale(1.1);
+}
+
+/* Meeting Controls */
+.meeting-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.control-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.mic-btn, .camera-btn {
+    background-color: #b8a082;
+    color: #4a2c20;
+}
+
+.mic-btn:hover, .camera-btn:hover {
+    background-color: #d4a574;
+}
+
+.mic-btn.muted {
+    background-color: #dc3545;
+    color: white;
+}
+
+.camera-btn.off {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Leave Meeting Button */
+.leave-meeting-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.leave-meeting-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .meeting-container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: 60px;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0.5rem;
+    }
+    
+    .nav-icons {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+    
+    .user-profiles {
+        flex-direction: row;
+        margin: 0;
+    }
+    
+    .chat-sidebar {
+        width: 100%;
+        height: 200px;
+        border-left: none;
+        border-top: 1px solid #d4a574;
+    }
+    
+    .participants-grid {
+        grid-template-columns: repeat(2, 1fr);
+        height: 150px;
+    }
+}
+
+/* Animations */
+.participant-video {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+    </style>
+</head>
+<body>
+    <div class="meeting-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Navigation Icons -->
+            <div class="nav-icons">
+                <button class="nav-icon" onclick="goToHome()" title="Home">🏠</button>
+                <button class="nav-icon" onclick="openSettings()" title="Settings">⚙️</button>
+                <button class="nav-icon active" onclick="toggleVideo()" title="Video">📹</button>
+                <button class="nav-icon" onclick="viewParticipants()" title="Participants">👥</button>
+                <button class="nav-icon" onclick="openCalendar()" title="Calendar">📅</button>
+                <button class="nav-icon" onclick="toggleChat()" title="Chat">💬</button>
+            </div>
+            
+            <!-- User Profiles -->
+            <div class="user-profiles">
+                <button class="user-profile" onclick="viewProfile(1)" title="User 1">👤</button>
+                <button class="user-profile" onclick="viewProfile(2)" title="User 2">👤</button>
+                <button class="user-profile" onclick="viewProfile(3)" title="User 3">👤</button>
+                <button class="user-profile" onclick="viewProfile(4)" title="User 4">👤</button>
+                <button class="user-profile" onclick="viewProfile(5)" title="User 5">👤</button>
+                <button class="user-profile" onclick="viewProfile(6)" title="User 6">👤</button>
+            </div>
+        </aside>
+        
+        <!-- Main Video Area -->
+        <main class="main-video-area">
+            <!-- Main Video -->
+            <div class="main-video" onclick="toggleFullscreen()">
+                <!-- Main video content would be here -->
+            </div>
+            
+            <!-- Participants Grid -->
+            <div class="participants-grid">
+                <div class="participant-video host" onclick="focusParticipant('host')">Host</div>
+                <div class="participant-video" onclick="focusParticipant('member1')">Member 1</div>
+                <div class="participant-video" onclick="focusParticipant('member2')">Member 2</div>
+                <div class="participant-video" onclick="focusParticipant('member3')">Member 3</div>
+                <div class="participant-video" onclick="focusParticipant('member4')">Member 4</div>
+                <div class="participant-video" onclick="focusParticipant('member5')">Member 5</div>
+                <div class="participant-video" onclick="focusParticipant('member6')">Member 6</div>
+                <div class="participant-video" onclick="focusParticipant('member7')">Member 7</div>
+            </div>
+        </main>
+        
+        <!-- Chat Sidebar -->
+        <aside class="chat-sidebar">
+            <!-- Time Display -->
+            <div class="time-display">
+                <div class="time" id="meeting-time">10:00 am</div>
+                <div class="date" id="meeting-date">Wed Oct 15, 2025</div>
+            </div>
+            
+            <!-- Participants List -->
+            <div class="participants-list">
+                <div class="participants-header">Participants (8)</div>
+                <div class="participant-icons">
+                    <div class="participant-icon" title="Host">👤</div>
+                    <div class="participant-icon" title="Member 1">👤</div>
+                    <div class="participant-icon" title="Member 2">👤</div>
+                    <div class="participant-icon" title="Member 3">👤</div>
+                    <div class="participant-icon" title="Member 4">👤</div>
+                </div>
+            </div>
+            
+            <!-- Chat Area -->
+            <div class="chat-area">
+                <div class="chat-messages" id="chat-messages">
+                    No messages yet. Start the conversation!
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" class="chat-input" id="chat-input" placeholder="Type a message..." onkeypress="handleChatKeypress(event)">
+                    <button class="send-btn" onclick="sendMessage()">➤</button>
+                </div>
+            </div>
+            
+            <!-- Meeting Controls -->
+            <div class="meeting-controls">
+                <button class="control-btn mic-btn" id="mic-btn" onclick="toggleMic()" title="Toggle Microphone">🎤</button>
+                <button class="control-btn camera-btn" id="camera-btn" onclick="toggleCamera()" title="Toggle Camera">📹</button>
+            </div>
+            
+            <!-- Leave Meeting -->
+            <button class="leave-meeting-btn" onclick="fixedLeaveMeeting()">Leave Meeting</button>
+        </aside>
+    </div>
+
+    <script>
+// 🚀 MEETING PAGE FIXED v2.0 - LEAVE BUTTON FIXED 🚀
+console.log('🚀🚀🚀 MEETING PAGE FIXED v2.0 LOADED! 🚀🚀🚀');
+console.log('📁 FILE: meeting.html with FIXED leave button');
+console.log('⏰ TIMESTAMP: 2025-10-16 11:49:48');
+console.log('🚀 Leave Meeting button should now work properly!');
+
+// Meeting state
+let meetingState = {
+    micMuted: false,
+    cameraOff: false,
+    chatVisible: true,
+    participants: ['Host', 'Member 1', 'Member 2', 'Member 3', 'Member 4', 'Member 5', 'Member 6', 'Member 7']
+};
+
+// Initialize meeting
+document.addEventListener('DOMContentLoaded', function() {
+    updateTime();
+    setInterval(updateTime, 1000);
+    initializeChat();
+    console.log('Meeting interface loaded successfully!');
+});
+
+// Update time display
+function updateTime() {
+    const now = new Date();
+    const timeOptions = { 
+        hour: 'numeric', 
+        minute: '2-digit',
+        hour12: true 
+    };
+    const dateOptions = { 
+        weekday: 'short',
+        month: 'short', 
+        day: 'numeric',
+        year: 'numeric'
+    };
+    
+    const timeElement = document.getElementById('meeting-time');
+    const dateElement = document.getElementById('meeting-date');
+    
+    if (timeElement) timeElement.textContent = now.toLocaleTimeString('en-US', timeOptions);
+    if (dateElement) dateElement.textContent = now.toLocaleDateString('en-US', dateOptions);
+}
+
+// Navigation functions
+function goToHome() {
+    if (confirm('Are you sure you want to leave the meeting?')) {
+        console.log('Leaving meeting and returning to dashboard');
+        window.location.href = 'dashboard.html';
+    }
+}
+
+function openSettings() {
+    alert('Meeting settings would open here');
+}
+
+function toggleVideo() {
+    console.log('Video options toggled');
+}
+
+function viewParticipants() {
+    alert('Participants panel would expand here');
+}
+
+function openCalendar() {
+    alert('Calendar integration would open here');
+}
+
+function toggleChat() {
+    const chatSidebar = document.querySelector('.chat-sidebar');
+    chatSidebar.style.display = chatSidebar.style.display === 'none' ? 'flex' : 'none';
+    meetingState.chatVisible = !meetingState.chatVisible;
+}
+
+// Video controls
+function toggleFullscreen() {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    } else {
+        document.documentElement.requestFullscreen();
+    }
+}
+
+function focusParticipant(participantId) {
+    console.log(`Focusing on ${participantId}`);
+    alert(`${participantId} is now in main video view`);
+}
+
+// Meeting controls
+function toggleMic() {
+    const micBtn = document.getElementById('mic-btn');
+    meetingState.micMuted = !meetingState.micMuted;
+    
+    if (meetingState.micMuted) {
+        micBtn.classList.add('muted');
+        micBtn.innerHTML = '🔇';
+        micBtn.title = 'Unmute Microphone';
+    } else {
+        micBtn.classList.remove('muted');
+        micBtn.innerHTML = '🎤';
+        micBtn.title = 'Mute Microphone';
+    }
+    
+    console.log(`Microphone ${meetingState.micMuted ? 'muted' : 'unmuted'}`);
+}
+
+function toggleCamera() {
+    const cameraBtn = document.getElementById('camera-btn');
+    meetingState.cameraOff = !meetingState.cameraOff;
+    
+    if (meetingState.cameraOff) {
+        cameraBtn.classList.add('off');
+        cameraBtn.innerHTML = '📷';
+        cameraBtn.title = 'Turn Camera On';
+    } else {
+        cameraBtn.classList.remove('off');
+        cameraBtn.innerHTML = '📹';
+        cameraBtn.title = 'Turn Camera Off';
+    }
+    
+    console.log(`Camera ${meetingState.cameraOff ? 'turned off' : 'turned on'}`);
+}
+
+// Chat functionality
+function initializeChat() {
+    // Add some sample messages for demo
+    setTimeout(() => {
+        addChatMessage('Host', 'Welcome everyone to the meeting!');
+    }, 2000);
+    
+    setTimeout(() => {
+        addChatMessage('Member 1', 'Thanks for hosting this session.');
+    }, 4000);
+}
+
+function handleChatKeypress(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+}
+
+function sendMessage() {
+    const chatInput = document.getElementById('chat-input');
+    const message = chatInput.value.trim();
+    
+    if (message) {
+        addChatMessage('You', message);
+        chatInput.value = '';
+        
+        // Simulate response for demo
+        setTimeout(() => {
+            const responses = [
+                'Thanks for sharing!',
+                'Good point!',
+                'I agree with that.',
+                'Can you elaborate on that?'
+            ];
+            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+            const randomMember = `Member ${Math.floor(Math.random() * 7) + 1}`;
+            addChatMessage(randomMember, randomResponse);
+        }, 1000 + Math.random() * 2000);
+    }
+}
+
+function addChatMessage(sender, message) {
+    const chatMessages = document.getElementById('chat-messages');
+    
+    // Clear the "no messages" text if it's the first message
+    if (chatMessages.textContent.includes('No messages yet')) {
+        chatMessages.innerHTML = '';
+        chatMessages.style.alignItems = 'flex-start';
+        chatMessages.style.justifyContent = 'flex-start';
+    }
+    
+    const messageElement = document.createElement('div');
+    messageElement.style.marginBottom = '0.5rem';
+    messageElement.style.padding = '0.5rem';
+    messageElement.style.backgroundColor = sender === 'You' ? '#d4a574' : '#b8a082';
+    messageElement.style.borderRadius = '10px';
+    messageElement.style.fontSize = '0.9rem';
+    messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+    
+    chatMessages.appendChild(messageElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Profile functions
+function viewProfile(userId) {
+    alert(`User ${userId} profile would open here`);
+}
+
+// Leave meeting - FIXED VERSION
+function fixedLeaveMeeting() {
+    console.log('Leave Meeting button clicked!');
+    if (confirm('Are you sure you want to leave the meeting and return to dashboard?')) {
+        console.log('CONFIRMED: Leaving meeting and going to dashboard.html');
+        window.location.href = 'dashboard.html';
+    } else {
+        console.log('User cancelled leaving meeting');
+    }
+}
+
+// Leave meeting - ORIGINAL (backup)
+function leaveMeeting() {
+    console.log('🚀 BACKUP: Leave meeting called');
+    fixedLeaveMeeting();
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey) {
+        switch(e.key) {
+            case 'm':
+                e.preventDefault();
+                toggleMic();
+                break;
+            case 'e':
+                e.preventDefault();
+                toggleCamera();
+                break;
+            case 'd':
+                e.preventDefault();
+                goToHome();
+                break;
+        }
+    }
+});
+
+console.log('🚀 Meeting FIXED v2.0 ready! Use Ctrl+M for mic, Ctrl+E for camera, Ctrl+D to leave');
+console.log('🚀 Leave Meeting button FIXED and ready!');
+    </script>
+</body>
+</html>

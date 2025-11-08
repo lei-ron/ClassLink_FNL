@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - ClassLink</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='dashboard.css') }}"
+    />
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  </head>
+  <body class="dashboard">
+    <div class="dashboard-container">
+      <!--! Sidebar -->
+
+      <aside class="sidebar">
+        <div class="logo-section">
+          <h2>ClassLink</h2>
+        </div>
+
+        <div class="time-display">
+          <div class="time" id="current-time">--:--</div>
+          <div class="date" id="current-date">Loading...</div>
+        </div>
+
+        <section>
+          <h3>Start a Private Chat</h3>
+          <input id="search" type="text" placeholder="Search user..." />
+          <button onclick="searchUser()">Search</button>
+          <div id="results"></div>
+        </section>
+
+        <section style="margin-top: 2rem">
+          <h3>Recent Chats</h3>
+          <div id="recent-chats">
+            {% for chat in recent_chats %}
+            <button
+              data-username="{{ chat.username }}"
+              class="{% if chat.username in unread_chats %}new-message{% endif %}"
+              onclick="openChat('{{ chat.username }}', this)"
+            >
+              {{ chat.fullname }}
+            </button>
+            {% endfor %}
+          </div>
+        </section>
+
+        <div class="user-profiles">
+          <button
+            class="user-profile"
+            title="User Profile"
+            onclick="window.location.href='/profile'"
+          >
+            👤
+          </button>
+        </div>
+      </aside>
+
+      <!--! Dashboard -->
+      <main class="main-content">
+        <div class="dashboard-header">
+          <h1>How's it going, {{ fullname }}?</h1>
+        </div>
+        <div class="chat-container">
+          <iframe id="chatFrame" src=""></iframe>
+        </div>
+      </main>
+    </div>
+
+    <script>
+
+      //<!--! Back-end
+
+      const socket = io({ transports: ["websocket"] });
+      const currentUsername = "{{ username }}";
+      socket.emit("register", { username: currentUsername });
+
+      let currentOpenChat = null;
+
+      //<!--* Updater
+      socket.on("recent_chat_update", function (data) {
+        const chatList = document.getElementById("recent-chats");
+        const placeholder = chatList.querySelector("p");
+        if (placeholder) placeholder.remove();
+
+        let btn = chatList.querySelector(`[data-username="${data.username}"]`);
+
+        if (btn) {
+          chatList.prepend(btn);
+
+          if (data.username !== currentOpenChat && !btn.classList.contains("new-message")) {
+            btn.classList.add("new-message");
+          }
+        } else {
+          btn = document.createElement("button");
+          btn.setAttribute("data-username", data.username);
+          btn.textContent = data.fullname;
+
+          if (data.username !== currentOpenChat) {
+            btn.classList.add("new-message");
+          }
+
+          btn.onclick = () => openChat(data.username, btn);
+          chatList.prepend(btn);
+        }
+
+        updateUnreadStorage();
+      });
+
+      //<!--* Mark as read
+      function openChat(username, btn) {
+        currentOpenChat = username;
+        btn.classList.remove("new-message");
+        fetch(`/mark_read/${username}`, { method: "POST" });
+        updateUnreadStorage();
+
+        const chatFrame = document.getElementById("chatFrame");
+        chatFrame.src = `/private_chat/${username}`;
+      }
+
+      //<!--* Load unread messages
+      document.addEventListener("DOMContentLoaded", function () {
+        const storedUnread = JSON.parse(localStorage.getItem("unreadChats") || "[]");
+        const serverUnread = [{% for chat in unread_chats %}"{{ chat }}",{% endfor %}];
+
+        const combinedUnread = Array.from(new Set([...storedUnread, ...serverUnread]));
+
+        const buttons = document.querySelectorAll("#recent-chats button");
+        buttons.forEach((btn) => {
+          const username = btn.getAttribute("data-username");
+          if (combinedUnread.includes(username)) {
+            btn.classList.add("new-message");
+          } else {
+            btn.classList.remove("new-message");
+          }
+        });
+
+        localStorage.setItem("unreadChats", JSON.stringify(combinedUnread));
+      });
+
+      function updateUnreadStorage() {
+        const unreadUsernames = Array.from(
+          document.querySelectorAll("#recent-chats button.new-message")
+        ).map((btn) => btn.getAttribute("data-username"));
+
+        localStorage.setItem("unreadChats", JSON.stringify(unreadUsernames));
+      }
+
+      //<!--! Front-end
+
+      //<!--* Clock
+      document.addEventListener("DOMContentLoaded", function () {
+        updateTime();
+        setInterval(updateTime, 1000);
+      });
+
+      function updateTime() {
+        const now = new Date();
+        const timeOptions = {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        };
+        const dateOptions = {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        };
+
+        document.getElementById("current-time").textContent =
+          now.toLocaleTimeString("en-US", timeOptions);
+        document.getElementById("current-date").textContent =
+          now.toLocaleDateString("en-US", dateOptions);
+      }
+
+      //<!--* Search users
+      async function searchUser() {
+        const query = document.getElementById("search").value.trim();
+        if (query === "") return;
+
+        const response = await fetch(`/search_user?query=${query}`);
+        const users = await response.json();
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = "";
+
+        const currentUsername = "{{ username }}";
+        const filteredUsers = users.filter(
+          (u) => u.username !== currentUsername
+        );
+
+        if (filteredUsers.length === 0) {
+          resultsDiv.innerHTML = "<p>No users found.</p>";
+          return;
+        }
+
+        filteredUsers.forEach((user) => {
+          const btn = document.createElement("button");
+          btn.textContent = `${user.fullname} (${user.username})`;
+          btn.onclick = () => openChat(user.username, btn);
+          resultsDiv.appendChild(btn);
+        });
+      }
+
+      document
+        .getElementById("search")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            searchUser();
+          }
+        });
+    </script>
+  </body>
+</html>

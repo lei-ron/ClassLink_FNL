@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Private Chat with {{ target.fullname }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='private_chat.css') }}"
+    />
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  </head>
+  <body>
+    <p class="chat-header">
+      {{ target.fullname }} <br />
+      ({{ target.username }})
+    </p>
+
+    <div id="chat-box" aria-live="polite">
+      <ul id="messages">
+        {% for msg in messages %}
+        <li
+          class="{{ 'my-message' if msg.sender_username == username else 'other-message' }}"
+        >
+          {{ msg.msg }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="input-area">
+      <input id="msg" autocomplete="off" placeholder="Type a message..." />
+      <button id="sendBtn">Send</button>
+    </div>
+
+    <script>
+      const socket = io();
+      const currentUsername = "{{ username }}";
+      const currentFullname = "{{ me }}";
+      const targetUsername = "{{ target.username }}";
+      const room = [currentUsername, targetUsername].sort().join("-");
+
+      const chatBox = document.getElementById("chat-box");
+      const messagesUl = document.getElementById("messages");
+      const input = document.getElementById("msg");
+      const sendBtn = document.getElementById("sendBtn");
+
+      const pendingSentMessages = [];
+
+      socket.emit("register", { username: currentUsername });
+      socket.emit("join_room", { room: room });
+      socket.emit("open_chat", { target: targetUsername });
+
+      window.addEventListener("beforeunload", () => {
+        socket.emit("close_chat");
+      });
+
+      function scrollToBottom() {
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+
+      function appendMessage(senderFullname, msg, senderUsername) {
+        const li = document.createElement("li");
+        li.textContent = msg;
+
+        if (senderUsername === currentUsername) {
+          li.classList.add("my-message");
+        } else {
+          li.classList.add("other-message");
+        }
+
+        messagesUl.appendChild(li);
+        requestAnimationFrame(scrollToBottom);
+      }
+
+      function sendMsg() {
+        const text = input.value.trim();
+        if (!text) return;
+
+        pendingSentMessages.push(text);
+
+        appendMessage(currentUsername, text, currentUsername);
+
+        socket.emit("private_message", { to: targetUsername, msg: text });
+
+        input.value = "";
+        requestAnimationFrame(scrollToBottom);
+      }
+
+      socket.on("private_message", function (data) {
+        if (
+          data.from_username === currentUsername &&
+          pendingSentMessages.length > 0
+        ) {
+          const idx = pendingSentMessages.indexOf(data.msg);
+          if (idx !== -1) {
+            pendingSentMessages.splice(idx, 1);
+            return;
+          }
+        }
+
+        if (
+          [currentUsername, targetUsername].includes(data.from_username) &&
+          [currentUsername, targetUsername].includes(data.to)
+        ) {
+          appendMessage(data.from, data.msg, data.from_username);
+        }
+      });
+
+      sendBtn.addEventListener("click", sendMsg);
+      input.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") sendMsg();
+      });
+
+      async function loadChatHistory() {
+        try {
+          const res = await fetch(`/private_chat_history/${targetUsername}`);
+          if (!res.ok) throw new Error("failed fetching history");
+          const history = await res.json();
+
+          messagesUl.innerHTML = "";
+          history.forEach((msg) => {
+            appendMessage(msg.sender_fullname, msg.msg, msg.sender_username);
+          });
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        requestAnimationFrame(scrollToBottom);
+      });
+
+      loadChatHistory();
+    </script>
+  </body>
+</html>

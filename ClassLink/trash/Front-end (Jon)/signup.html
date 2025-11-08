@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - ClassLink</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f3f0;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #f0f0f0;
+        }
+
+        .contact-btn {
+            background: #f5f3f0;
+            color: #8B4513;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 3rem;
+            font-weight: bold;
+        }
+
+        .signup-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .signup-card {
+            background: #B8A194;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .card-header h2 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            background: #F5E6A3;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            background: #F8EDB7;
+        }
+
+        .signup-btn {
+            width: 100%;
+            background: #F5E6A3;
+            color: #8B4513;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .signup-btn:hover {
+            background: #F8EDB7;
+            transform: translateY(-2px);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: #B8A194;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-link p {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .login-link a {
+            color: #F5E6A3;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        /* Error Message */
+        .error-message {
+            background: #f44336;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .signup-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .signup-card {
+                padding: 1.5rem;
+            }
+
+            nav {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            main {
+                padding: 2rem 1rem;
+            }
+
+            .signup-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">ClassLink</a>
+            <ul class="nav-links">
+                <li><a href="download.html">Download</a></li>
+                <li><a href="Aboutus.html">About Us</a></li>
+                <li><a href="plans.html">Plans</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+            <a href="contactus.html" class="contact-btn">Contact Us</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Sign Up</h1>
+        
+        <div class="success-message" id="successMessage">
+            Account created successfully! Please check your email for verification.
+        </div>
+        
+        <div class="error-message" id="errorMessage">
+            Please fill in all required fields.
+        </div>
+
+        <div class="signup-container">
+            <!-- Teacher Signup -->
+            <div class="signup-card">
+                <div class="card-header">
+                    <h2>As Teacher</h2>
+                </div>
+                <form id="teacherForm">
+                    <div class="form-group">
+                        <label for="teacherFullName">Full Name</label>
+                        <input type="text" id="teacherFullName" name="fullName" placeholder="Enter your full name, middle initial, suffix (optional)" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="teacherUsername">Username</label>
+                        <input type="text" id="teacherUsername" name="username" placeholder="Choose a username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="teacherPassword">Password</label>
+                        <input type="password" id="teacherPassword" name="password" placeholder="Create a strong password" required>
+                    </div>
+                    
+                    <button type="submit" class="signup-btn">Sign Up</button>
+                </form>
+            </div>
+
+            <!-- Student Signup -->
+            <div class="signup-card">
+                <div class="card-header">
+                    <h2>As Student</h2>
+                </div>
+                <form id="studentForm">
+                    <div class="form-group">
+                        <label for="studentFullName">Full Name</label>
+                        <input type="text" id="studentFullName" name="fullName" placeholder="Enter your full name, middle initial, suffix (optional)" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="studentUsername">Username</label>
+                        <input type="text" id="studentUsername" name="username" placeholder="Choose a username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="studentPassword">Password</label>
+                        <input type="password" id="studentPassword" name="password" placeholder="Create a strong password" required>
+                    </div>
+                    
+                    <button type="submit" class="signup-btn">Sign Up</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="login-link">
+            <p>Already have an account?</p>
+            <a href="login.html">Login Here</a>
+        </div>
+    </main>
+
+    <script>
+        // Form validation and submission
+        function validateForm(form) {
+            const fullName = form.querySelector('input[name="fullName"]').value.trim();
+            const username = form.querySelector('input[name="username"]').value.trim();
+            const password = form.querySelector('input[name="password"]').value.trim();
+            
+            if (!fullName || !username || !password) {
+                return false;
+            }
+            
+            if (password.length < 6) {
+                showError('Password must be at least 6 characters long.');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            const errorDiv = document.getElementById('errorMessage');
+            
+            errorDiv.style.display = 'none';
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            
+            // Scroll to top to show message
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showError(message) {
+            const successDiv = document.getElementById('successMessage');
+            const errorDiv = document.getElementById('errorMessage');
+            
+            successDiv.style.display = 'none';
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            
+            // Scroll to top to show message
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleSignup(event, userType) {
+            event.preventDefault();
+            
+            const form = event.target;
+            
+            if (!validateForm(form)) {
+                showError('Please fill in all required fields and ensure password is at least 6 characters.');
+                return;
+            }
+            
+            // Get form data
+            const formData = new FormData(form);
+            const fullName = formData.get('fullName');
+            const username = formData.get('username');
+            const password = formData.get('password');
+            
+            // Simulate signup process
+            const submitBtn = form.querySelector('.signup-btn');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Creating Account...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                showSuccess(`Welcome ${fullName}! Your ${userType} account has been created successfully. Please check your email for verification.`);
+                form.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Redirect to login after 3 seconds
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 3000);
+            }, 1500);
+        }
+
+        // Add event listeners
+        document.getElementById('teacherForm').addEventListener('submit', function(e) {
+            handleSignup(e, 'teacher');
+        });
+
+        document.getElementById('studentForm').addEventListener('submit', function(e) {
+            handleSignup(e, 'student');
+        });
+
+        // Username availability check simulation
+        function checkUsernameAvailability(input) {
+            const username = input.value.trim();
+            if (username.length > 3) {
+                // Simulate checking username availability
+                // In a real application, this would make an API call
+                console.log('Checking username availability for:', username);
+            }
+        }
+
+        // Add username validation
+        document.getElementById('teacherUsername').addEventListener('blur', function() {
+            checkUsernameAvailability(this);
+        });
+
+        document.getElementById('studentUsername').addEventListener('blur', function() {
+            checkUsernameAvailability(this);
+        });
+    </script>
+</body>
+</html>

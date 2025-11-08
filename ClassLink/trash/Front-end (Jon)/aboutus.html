@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - ClassLink</title>
+    <style>
+    /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f3f0;
+}
+
+/* Header Styles */
+.header {
+    background-color: #4a2c20;
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo h2 {
+    color: #f5f3f0;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.logo a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #f5f3f0;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #d4a574;
+}
+
+.contact-btn {
+    background-color: #d4a574;
+    color: #4a2c20;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.contact-btn:hover {
+    background-color: #c29660;
+}
+
+/* Main Content */
+.main-content {
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* About Hero Section */
+.about-hero {
+    margin-bottom: 3rem;
+}
+
+.about-hero h1 {
+    font-size: 2.5rem;
+    color: #4a2c20;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    font-weight: bold;
+}
+
+.about-subtitle {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+}
+
+/* Video Container */
+.video-placeholder {
+    width: 100%;
+    max-width: 600px;
+    height: 300px;
+    background-color: #b8a082;
+    border-radius: 15px;
+    margin: 0 auto 3rem;
+}
+
+/* Who We Are Section */
+.who-we-are {
+    text-align: center;
+}
+
+.who-we-are h2 {
+    font-size: 2rem;
+    color: #4a2c20;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.who-we-are-text {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    text-align: justify;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .main-content {
+        padding: 2rem 1rem;
+    }
+
+    .about-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .video-placeholder {
+        height: 200px;
+    }
+    
+    .who-we-are-text {
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-hero h1 {
+        font-size: 1.5rem;
+    }
+    
+    .video-placeholder {
+        height: 150px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <h2>ClassLink</h2>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="download.html" class="nav-link">Download</a></li>
+                <li><a href="Aboutus.html" class="nav-link">About Us</a></li>
+                <li><a href="plans.html" class="nav-link">Plans</a></li>
+                <li><a href="privacy.html" class="nav-link">Privacy</a></li>
+            </ul>
+            <a href="contactus.html" class="contact-btn">Contact Us</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- About Hero Section -->
+        <section class="about-hero">
+            <h1>Connecting Learners & educators to an innovative future ahead one step at a time.</h1>
+            <p class="about-subtitle">Understanding our client's needs is our top priority. We bring tangible results that drives user expectations.</p>
+        </section>
+        
+        <!-- Video Container -->
+        <div class="video-placeholder"></div>
+        
+        <!-- Who We Are Section -->
+        <section class="who-we-are">
+            <h2>Who We Are?</h2>
+            <p class="who-we-are-text">We are ClassLink, a team of skilled developers who deal with enterprises around the globe, providing them a platform to minimise the hassle of having different softwares for learning and collaboration. At ClassLink, we specialise in Real time Data Management Systems that contribute to the effectiveness of instant messaging, courier, compiling, collaborative calls and many more.</p>
+        </section>
+    </main>
+</body>
+</html>

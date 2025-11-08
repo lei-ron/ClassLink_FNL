@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up | ClassLink</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <!--! Navigation bar -->
+
+    <header class="header">
+      <nav class="navbar">
+        <div class="logo">
+          <a>
+            <h2>ClassLink</h2>
+          </a>
+        </div>
+        <a class="contact-btn">W.I.P</a>
+      </nav>
+    </header>
+
+    <!--! Sign Up -->
+
+    <main class="main-content">
+      <div class="login-container">
+        <div class="login-form-container">
+          <form
+            class="login-form"
+            method="POST"
+            action="{{ url_for('signup') }}"
+          >
+            <h2>Sign Up</h2>
+
+            <div class="form-group">
+              <label for="fullname">Full Name:</label>
+              <input
+                type="text"
+                id="fullname"
+                name="fullname"
+                placeholder="Enter your full name."
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Choose a username."
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a password."
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="is_teacher" value="yes" />
+                Sign up as teacher.
+              </label>
+            </div>
+
+            <button type="submit" class="login-btn">Create Account</button>
+          </form>
+
+          <div class="create-account-link">
+            <p>
+              Already have an account?
+              <a href="{{ url_for('login') }}">Log In!</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

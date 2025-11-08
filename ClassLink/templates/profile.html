@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Profile</title>
+  </head>
+  <body>
+    <h1>Profile Page</h1>
+
+    <p><strong>Full Name:</strong> {{ fullname }}</p>
+    <p><strong>Username:</strong> {{ username }}</p>
+    <p><strong>Role:</strong> {{ "Teacher" if is_teacher else "Student" }}</p>
+
+    <a href="/dashboard"><button>Back to Dashboard</button></a>
+    <a href="/logout"><button>Log Out</button></a>
+  </body>
+</html>

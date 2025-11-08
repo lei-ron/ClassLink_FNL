@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassLink - Digital Learning Collaboration</title>
+    <style>
+    /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f3f0;
+}
+
+/* Header Styles */
+.header {
+    background-color: #4a2c20;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo h2 {
+    color: #f5f3f0;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.logo a {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.logo a:hover h2 {
+    color: #d4a574;
+    transform: scale(1.05);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #f5f3f0;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    color: #d4a574;
+    text-decoration: underline;
+}
+
+.contact-btn {
+    background-color: #d4a574;
+    color: #4a2c20;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.contact-btn:hover {
+    background-color: #c29660;
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero {
+    margin-top: 80px;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    color: #4a2c20;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button {
+    background-color: #4a2c20;
+    color: #f5f3f0;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.cta-button:hover {
+    background-color: #5a3a2a;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 44, 32, 0.3);
+}
+
+/* Placeholder Cards */
+.placeholder-cards {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #b8a082;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.large-card {
+    width: 400px;
+    height: 250px;
+}
+
+.small-card {
+    width: 200px;
+    height: 250px;
+}
+
+/* About Us Section */
+.features {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+
+.features h2 {
+    font-size: 2rem;
+    color: #4a2c20;
+    margin-bottom: 3rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    background-color: #4a2c20;
+    color: #f5f3f0;
+    padding: 2rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(74, 44, 32, 0.3);
+}
+
+.feature-number {
+    background-color: #d4a574;
+    color: #4a2c20;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0 auto 1rem auto;
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #d4a574;
+}
+
+.feature-card p {
+    line-height: 1.6;
+    color: #f5f3f0;
+}
+
+/* Updates Section */
+.updates {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.updates h2 {
+    font-size: 2rem;
+    color: #4a2c20;
+    margin-bottom: 3rem;
+}
+
+.updates-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.update-card {
+    background-color: #b8a082;
+    padding: 2rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.update-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(184, 160, 130, 0.3);
+}
+
+.update-card h3 {
+    color: #4a2c20;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.update-card p {
+    color: #4a2c20;
+    line-height: 1.6;
+}
+
+.update-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.update-item {
+    background-color: #d4a574;
+    padding: 1.5rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.update-item:hover {
+    background-color: #c29660;
+    transform: translateY(-3px);
+}
+
+.update-icon {
+    font-size: 1.5rem;
+}
+
+.update-item span {
+    color: #4a2c20;
+    font-weight: bold;
+}
+
+/* Footer */
+.footer {
+    background-color: #4a2c20;
+    color: #f5f3f0;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: #d4a574;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #f5f3f0;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .placeholder-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .large-card, .small-card {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .updates-container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* Button animations and interactions */
+button, .feature-card, .update-card, .update-item {
+    user-select: none;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.feature-card:active, .update-card:active, .update-item:active {
+    transform: scale(0.98);
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <h2>ClassLink</h2>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="download.html" class="nav-link">Download</a></li>
+                <li><a href="Aboutus.html" class="nav-link">About Us</a></li>
+                <li><a href="plans.html" class="nav-link">Plans</a></li>
+                <li><a href="privacy.html" class="nav-link">Privacy</a></li>
+            </ul>
+            <a href="contactus.html" class="contact-btn" style="text-decoration: none; display: inline-block;">Contact Us</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Innovative, Seamless, & Real-time interaction with an eye for educating learners through Digital Collaboration</h1>
+            <p>Unlock infinite possibilities together and create meaningful learning experiences.</p>
+            <a href="login.html" class="cta-button" style="text-decoration: none; display: inline-block;">Log in for Free</a>
+        </div>
+        
+        <!-- Placeholder Cards -->
+        <div class="placeholder-cards">
+            <div class="card large-card"></div>
+            <div class="card small-card"></div>
+        </div>
+    </section>
+
+
+
+    <!-- Updates Section -->
+    <section class="updates" id="news">
+        <h2>New Updates coming this 2026!</h2>
+        <div class="updates-container">
+            <div class="update-card" onclick="handleUpdateClick('announcement1')">
+                <h3>Announcement 1</h3>
+                <p>Exciting new features are coming to enhance your learning experience. Stay tuned for revolutionary updates that will transform digital education.</p>
+            </div>
+            <div class="update-sidebar">
+                <div class="update-item" onclick="handleUpdateClick('feature1')">
+                    <div class="update-icon">📱</div>
+                    <span>Mobile App</span>
+                </div>
+                <div class="update-item" onclick="handleUpdateClick('feature2')">
+                    <div class="update-icon">🎯</div>
+                    <span>AI Features</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 ClassLink. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="#terms" onclick="handleFooterClick('terms')">Terms of Service</a>
+                <a href="contactus.html">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+// Navigation and Interaction Functions
+
+// Handle login button clicks
+function handleLogin() {
+    alert('Login functionality would redirect to login page');
+    console.log('Login button clicked');
+}
+
+// Handle sign up button clicks
+function handleSignUp() {
+    alert('Sign up functionality would redirect to registration page');
+    console.log('Sign up button clicked');
+}
+
+// Handle feature card clicks
+function handleFeatureClick(featureType) {
+    const messages = {
+        'chat': 'Real-Time Chat System: This feature would open the chat interface where users can communicate instantly.',
+        'storage': 'All-in-One Storage: This would navigate to the resource library where educational materials are stored.',
+        'video': 'Real-Time Video Collaboration: This would launch the video conferencing tool for collaborative sessions.'
+    };
+    
+    alert(messages[featureType] || 'Feature details would be displayed here');
+    console.log(`Feature clicked: ${featureType}`);
+}
+
+
+
+// Handle update card clicks
+function handleUpdateClick(updateType) {
+    const messages = {
+        'announcement1': 'Announcement 1: Detailed information about upcoming features and improvements would be displayed.',
+        'feature1': 'Mobile App: Information about the upcoming mobile application would be shown.',
+        'feature2': 'AI Features: Details about new artificial intelligence capabilities would be displayed.'
+    };
+    
+    alert(messages[updateType] || 'Update details would be displayed here');
+    console.log(`Update clicked: ${updateType}`);
+}
+
+// Handle footer link clicks
+function handleFooterClick(linkType) {
+    const messages = {
+        'privacy': 'Privacy Policy: This would display the privacy policy page.',
+        'terms': 'Terms of Service: This would show the terms and conditions.',
+        'contact': 'Contact Us: This would open the contact form or information page.'
+    };
+    
+    alert(messages[linkType] || 'Page would be displayed here');
+    console.log(`Footer link clicked: ${linkType}`);
+}
+
+// Smooth scrolling for navigation links
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click event listeners to navigation links
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Only prevent default for internal links (starting with #)
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const targetSection = document.querySelector(href);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                
+                console.log(`Navigation clicked: ${href}`);
+            }
+        });
+    });
+
+    // Add hover effects and animations
+    addHoverEffects();
+    
+    // Add keyboard navigation support
+    addKeyboardSupport();
+});
+
+// Add hover effects to interactive elements
+function addHoverEffects() {
+    const buttons = document.querySelectorAll('button');
+    const cards = document.querySelectorAll('.feature-card, .update-card, .update-item');
+    
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+    
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+}
+
+// Add keyboard navigation support
+function addKeyboardSupport() {
+    const interactiveElements = document.querySelectorAll('button, .feature-card, .update-card, .update-item, .nav-link');
+    
+    interactiveElements.forEach(element => {
+        // Make elements focusable
+        if (!element.hasAttribute('tabindex')) {
+            element.setAttribute('tabindex', '0');
+        }
+        
+        // Add keyboard event listeners (only for non-link elements)
+        if (!element.matches('a, .nav-link')) {
+            element.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        }
+        
+        // Add focus styles
+        element.addEventListener('focus', function() {
+            this.style.outline = '3px solid #d4a574';
+            this.style.outlineOffset = '2px';
+        });
+        
+        element.addEventListener('blur', function() {
+            this.style.outline = 'none';
+        });
+    });
+}
+
+// Add click feedback animations
+function addClickFeedback(element) {
+    element.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        element.style.transform = '';
+    }, 150);
+}
+
+// Enhanced button click handlers with visual feedback (excluding navigation links)
+document.addEventListener('DOMContentLoaded', function() {
+    const allClickableElements = document.querySelectorAll('button:not(.nav-link), .feature-card, .update-card, .update-item');
+    
+    allClickableElements.forEach(element => {
+        element.addEventListener('click', function() {
+            addClickFeedback(this);
+        });
+    });
+});
+
+// Mobile menu toggle (for future enhancement)
+function toggleMobileMenu() {
+    const navMenu = document.querySelector('.nav-menu');
+    navMenu.classList.toggle('mobile-active');
+}
+
+// Search functionality (placeholder)
+function handleSearch(query) {
+    alert(`Search functionality would search for: "${query}"`);
+    console.log(`Search query: ${query}`);
+}
+
+// Newsletter subscription (placeholder)
+function handleNewsletterSignup(email) {
+    alert(`Newsletter signup functionality would register: "${email}"`);
+    console.log(`Newsletter signup: ${email}`);
+}
+
+// Demo data and functionality
+const demoData = {
+    features: [
+        {
+            id: 'chat',
+            name: 'Real-Time Chat System',
+            description: 'Connect instantly with students and educators',
+            benefits: ['Instant messaging', 'Group discussions', 'File sharing', 'Emoji reactions']
+        },
+        {
+            id: 'storage',
+            name: 'All-in-One Storage',
+            description: 'Centralized educational resource management',
+            benefits: ['Cloud storage', 'Easy organization', 'Quick access', 'Sharing capabilities']
+        },
+        {
+            id: 'video',
+            name: 'Video Collaboration',
+            description: 'Face-to-face learning experiences',
+            benefits: ['HD video calls', 'Screen sharing', 'Recording', 'Virtual whiteboard']
+        }
+    ],
+    updates: [
+        {
+            id: 'mobile',
+            name: 'Mobile App Release',
+            description: 'Learn on the go with our new mobile application',
+            releaseDate: '2026-Q1'
+        },
+        {
+            id: 'ai',
+            name: 'AI-Powered Features',
+            description: 'Smart recommendations and automated assistance',
+            releaseDate: '2026-Q2'
+        }
+    ]
+};
+
+// Function to display detailed feature information
+function showFeatureDetails(featureId) {
+    const feature = demoData.features.find(f => f.id === featureId);
+    if (feature) {
+        const benefits = feature.benefits.join('\n• ');
+        alert(`${feature.name}\n\n${feature.description}\n\nKey Benefits:\n• ${benefits}`);
+    }
+}
+
+// Function to display update information
+function showUpdateDetails(updateId) {
+    const update = demoData.updates.find(u => u.id === updateId);
+    if (update) {
+        alert(`${update.name}\n\n${update.description}\n\nExpected Release: ${update.releaseDate}`);
+    }
+}
+
+console.log('ClassLink website loaded successfully!');
+console.log('All interactive elements are ready for user interaction.');
+    </script>
+</body>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // This will make sure the meeting link works even from index.html
+  const meetingLink = document.querySelector(".meeting-link");
+  if (meetingLink) {
+    meetingLink.addEventListener("click", (e) => {
+      e.preventDefault(); // prevent default behavior
+      alert("Joining ongoing meeting...");
+      window.location.href = "meeting.html"; // redirect properly
+    });
+  }
+});
+</script>
+</html>

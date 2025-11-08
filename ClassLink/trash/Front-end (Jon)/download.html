@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download ClassLink - Digital Learning Collaboration</title>
+    <style>
+    /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f3f0;
+    min-height: 100vh;
+}
+
+/* Header Styles */
+.header {
+    background-color: #4a2c20;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo h2 {
+    color: #f5f3f0;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.logo a {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.logo a:hover h2 {
+    color: #d4a574;
+    transform: scale(1.05);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #f5f3f0;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    color: #d4a574;
+    text-decoration: underline;
+}
+
+.nav-link.active {
+    color: #d4a574;
+    font-weight: bold;
+}
+
+.contact-btn {
+    background-color: #d4a574;
+    color: #4a2c20;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.contact-btn:hover {
+    background-color: #c29660;
+    transform: translateY(-2px);
+}
+
+/* Main Content */
+.main-content {
+    margin-top: 100px;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.download-section h1 {
+    font-size: 2.5rem;
+    color: #4a2c20;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.download-section p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+/* Download Buttons Container */
+.download-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.download-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    min-width: 160px;
+    height: 50px;
+    justify-content: center;
+}
+
+.download-btn:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Specific store button styles */
+.google-play {
+    background-color: #414141;
+}
+
+.app-store {
+    background-color: #000;
+}
+
+.windows-store {
+    background-color: #0078d4;
+}
+
+.mac-store {
+    background-color: #000;
+}
+
+/* Button icons */
+.btn-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+/* Create Account Button */
+.create-account-btn {
+    background-color: #d4a574;
+    color: #4a2c20;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 2rem;
+}
+
+.create-account-btn:hover {
+    background-color: #c29660;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 165, 116, 0.3);
+}
+
+/* Footer */
+.footer {
+    background-color: #4a2c20;
+    color: #f5f3f0;
+    padding: 2rem;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .main-content {
+        margin-top: 150px;
+        padding: 1rem;
+    }
+
+    .download-section h1 {
+        font-size: 2rem;
+    }
+
+    .download-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .download-btn {
+        width: 200px;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Button animations */
+button:active, .download-btn:active {
+    transform: scale(0.98);
+}
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <h2>ClassLink</h2>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="download.html" class="nav-link active">Download</a></li>
+                <li><a href="Aboutus.html" class="nav-link">About Us</a></li>
+                <li><a href="plans.html" class="nav-link">Plans</a></li>
+                <li><a href="privacy.html" class="nav-link">Privacy</a></li>
+            </ul>
+            <a href="contactus.html" class="contact-btn">Contact Us</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="download-section">
+            <h1>Download our app version</h1>
+            <p>Now available on App Store, Google Play, Windows, Mac.</p>
+            
+            <div class="download-buttons">
+                <a href="#" class="download-btn google-play" onclick="handleDownload('google-play')">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                    </svg>
+                    <div>
+                        <div style="font-size: 10px;">GET IT ON</div>
+                        <div style="font-weight: bold;">Google Play</div>
+                    </div>
+                </a>
+
+                <a href="#" class="download-btn app-store" onclick="handleDownload('app-store')">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z"/>
+                    </svg>
+                    <div>
+                        <div style="font-size: 10px;">Download on the</div>
+                        <div style="font-weight: bold;">App Store</div>
+                    </div>
+                </a>
+
+                <a href="#" class="download-btn windows-store" onclick="handleDownload('windows-store')">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3,12V6.75L9,5.43V11.91L3,12M20,3V11.75L10,11.9V5.21L20,3M3,13L9,13.09V19.9L3,18.75V13M20,13.25V22L10,20.09V13.1L20,13.25Z"/>
+                    </svg>
+                    <div>
+                        <div style="font-size: 10px;">Download from</div>
+                        <div style="font-weight: bold;">Windows Store</div>
+                    </div>
+                </a>
+
+                <a href="#" class="download-btn mac-store" onclick="handleDownload('mac-store')">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z"/>
+                    </svg>
+                    <div>
+                        <div style="font-size: 10px;">Available on the</div>
+                        <div style="font-weight: bold;">Mac App Store</div>
+                    </div>
+                </a>
+            </div>
+
+            <button class="create-account-btn" onclick="handleCreateAccount()">Create an account</button>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Footer</p>
+        </div>
+    </footer>
+
+    <script>
+// Download functionality
+function handleDownload(platform) {
+    const messages = {
+        'google-play': 'Redirecting to Google Play Store...',
+        'app-store': 'Redirecting to Apple App Store...',
+        'windows-store': 'Redirecting to Microsoft Store...',
+        'mac-store': 'Redirecting to Mac App Store...'
+    };
+    
+    alert(messages[platform] || 'Download starting...');
+    console.log(`Download initiated for: ${platform}`);
+    
+    // In a real application, these would redirect to actual app stores
+    // For demo purposes, we'll show an alert
+    setTimeout(() => {
+        console.log(`Download would start for ${platform}`);
+    }, 1000);
+}
+
+// Create account functionality
+function handleCreateAccount() {
+    alert('Redirecting to account creation page...');
+    console.log('Create account button clicked');
+    // In a real application, this would redirect to signup page
+}
+
+// Navigation handling
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click event listeners to navigation links
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Handle internal links
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const targetSection = document.querySelector(href);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+            // External links (like index.html) will navigate normally
+            
+            console.log(`Navigation clicked: ${href}`);
+        });
+    });
+
+    // Add hover effects
+    addHoverEffects();
+    
+    // Add keyboard navigation support
+    addKeyboardSupport();
+});
+
+// Add hover effects to interactive elements
+function addHoverEffects() {
+    const buttons = document.querySelectorAll('button, .download-btn, .contact-btn');
+    
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            if (!this.style.transform.includes('scale')) {
+                this.style.transform = 'translateY(-2px)';
+            }
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            if (!this.style.transform.includes('scale')) {
+                this.style.transform = 'translateY(0)';
+            }
+        });
+    });
+}
+
+// Add keyboard navigation support
+function addKeyboardSupport() {
+    const interactiveElements = document.querySelectorAll('button, .download-btn, .contact-btn, .nav-link');
+    
+    interactiveElements.forEach(element => {
+        // Make elements focusable
+        if (!element.hasAttribute('tabindex')) {
+            element.setAttribute('tabindex', '0');
+        }
+        
+        // Add keyboard event listeners
+        element.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+        
+        // Add focus styles
+        element.addEventListener('focus', function() {
+            this.style.outline = '3px solid #d4a574';
+            this.style.outlineOffset = '2px';
+        });
+        
+        element.addEventListener('blur', function() {
+            this.style.outline = 'none';
+        });
+    });
+}
+
+// Add click feedback animations
+function addClickFeedback(element) {
+    element.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        element.style.transform = '';
+    }, 150);
+}
+
+// Enhanced button click handlers with visual feedback
+document.addEventListener('DOMContentLoaded', function() {
+    const allClickableElements = document.querySelectorAll('button, .download-btn, .contact-btn');
+    
+    allClickableElements.forEach(element => {
+        element.addEventListener('click', function() {
+            addClickFeedback(this);
+        });
+    });
+});
+
+console.log('ClassLink download page loaded successfully!');
+console.log('All download buttons are ready for user interaction.');
+    </script>
+</body>
+</html>

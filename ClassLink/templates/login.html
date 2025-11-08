@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In | ClassLink</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <!--! Navigation bar -->
+
+    <header class="header">
+      <nav class="navbar">
+        <div class="logo">
+          <a>
+            <h2>ClassLink</h2>
+          </a>
+        </div>
+        <a class="contact-btn">W.I.P</a>
+      </nav>
+    </header>
+
+    <!--! Log In -->
+
+    <main class="main-content">
+      <div class="login-container">
+        <div class="login-form-container">
+          <form
+            class="login-form"
+            method="POST"
+            action="{{ url_for('login') }}"
+          >
+            <h2>Log In</h2>
+
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter your registered username."
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your registered password."
+                required
+              />
+            </div>
+
+            {% if error %}
+            <p class="error-message">{{ error }}</p>
+            {% endif %}
+
+            <button type="submit" class="login-btn">Join the Class</button>
+          </form>
+
+          <div class="create-account-link">
+            <p>
+              Don't have an account?
+              <a href="{{ url_for('signup') }}">Sign Up!</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
